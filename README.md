@@ -18,4 +18,5 @@ mulop = '*' | '/'
 <h3>Aulas</h3>
 <ul>
 <li><a href="https://github.com/m-fidalgo/compiladores/tree/aula-01">Aula 01</a>: Funções básicas do lexer e parser</li>
+<li>Aula 03: <a href="https://github.com/m-fidalgo/compiladores/tree/aula-03">Versão 0</a>, <a href="https://github.com/m-fidalgo/compiladores/tree/aula-03.1">Versão 1</a> e <a href="https://github.com/m-fidalgo/compiladores/tree/aula-03.2">Versão 2</a></li>
 </ul>
