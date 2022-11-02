@@ -15,6 +15,13 @@ addop = '+' | '-'
 mulop = '*' | '/'
 ```
 
+<h3>Rodar</h3>
+
+```
+echo "a + b+ | ./expr
+./expr a + b
+```
+
 <h3>Aulas</h3>
 <ul>
 <li><a href="https://github.com/m-fidalgo/compiladores/tree/aula-01">Aula 01</a>: Funções básicas do lexer e parser</li>
