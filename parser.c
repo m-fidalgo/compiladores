@@ -96,6 +96,7 @@ void E (void)
     match(lookahead);
   }
 
+_T:
   T();
 
   /**/
@@ -105,21 +106,24 @@ void E (void)
   }
   /**/
 
-  while(addop ()) {
+  /**/
+  if(oplus) {
+    switch(oplus) {
+      case '+':
+        acc = pop() + acc;
+        break;
+      default:
+        acc = pop() - acc;
+        break;
+    }
+    oplus = 0;
+  }
+  /**/
+
+  if(addop ()) {
     /**/oplus = lookahead; push();/**/
     match (lookahead);
-    T ();
-  
-  /**/
-  switch(oplus) {
-		case '+':
-			acc = pop() + acc;
-			break;
-		default:
-			acc = pop() - acc;
-			break;
-	}
-  /**/
+    goto _T;
   }
 }
 
@@ -127,24 +131,26 @@ void E (void)
 void T (void)
 {
   /**/int otimes = 0;/**/
-
+_F:
   F();
+  /**/
+  if(otimes) {
+    switch(otimes) {
+      case '*':
+        acc = pop() * acc;
+        break;
+      default:
+        acc = pop() / acc;
+        break;
+    }
+    otimes = 0;
+  }  
+  /**/
 
-  while (mulop ()) {
+  if (mulop ()) {
     /**/otimes = lookahead; push();/**/
     match (lookahead);
-    F ();
-
-  /**/
-	switch(otimes) {
-		case '*':
-			acc = pop() * acc;
-			break;
-		default:
-			acc = pop() / acc;
-			break;
-	}
-  /**/
+    goto _F;
 	}
 }
 
