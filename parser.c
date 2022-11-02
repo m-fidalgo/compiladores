@@ -89,7 +89,7 @@ int mulop (void)
 /* E -> [unary] T { addop T } */
 void E (void)
 {
-	/**/int ominus = 0, oplus = 0;/**/
+	/**/int ominus = 0, oplus = 0, otimes = 0;/**/
 
   if(unary ()){
     /**/if(lookahead == '-') ominus = lookahead;/**/
@@ -97,7 +97,27 @@ void E (void)
   }
 
 _T:
-  T();
+_F:
+  F();
+  /**/
+  if(otimes) {
+    switch(otimes) {
+      case '*':
+        acc = pop() * acc;
+        break;
+      default:
+        acc = pop() / acc;
+        break;
+    }
+    otimes = 0;
+  }  
+  /**/
+
+  if (mulop ()) {
+    /**/otimes = lookahead; push();/**/
+    match (lookahead);
+    goto _F;
+	}
 
   /**/
   if(ominus) {
@@ -125,33 +145,6 @@ _T:
     match (lookahead);
     goto _T;
   }
-}
-
-/* T -> F { mulop F } */
-void T (void)
-{
-  /**/int otimes = 0;/**/
-_F:
-  F();
-  /**/
-  if(otimes) {
-    switch(otimes) {
-      case '*':
-        acc = pop() * acc;
-        break;
-      default:
-        acc = pop() / acc;
-        break;
-    }
-    otimes = 0;
-  }  
-  /**/
-
-  if (mulop ()) {
-    /**/otimes = lookahead; push();/**/
-    match (lookahead);
-    goto _F;
-	}
 }
 
 /* F -> DEC | OCT | HEX | FLT | ID [ = E ] | (E) */
