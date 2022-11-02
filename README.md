@@ -18,7 +18,7 @@ mulop = '*' | '/'
 <h3>Rodar</h3>
 
 ```
-echo "a + b+ | ./expr
+echo "a + b" | ./expr
 ./expr a + b
 ```
 
